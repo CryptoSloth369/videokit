@@ -1,0 +1,14 @@
+{
+  "name": "howto-video-kit",
+  "private": true,
+  "type": "module",
+  "description": "Agent-made how-to videos of a web app: a step file is played in headless Chrome, then rendered (on Modal or locally) with a cursor, click highlights, zoom and text captions.",
+  "scripts": {
+    "serve-example": "node example/serve.mjs",
+    "record-example": "node record.mjs example/howto/find-a-customer.json example/howto/add-a-customer.json",
+    "packet-example": "node build_packet.mjs example/howto/packet.json"
+  },
+  "dependencies": {
+    "playwright": "1.63.0"
+  }
+}

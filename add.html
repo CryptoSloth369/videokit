@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add customer - Sample Customer Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Sample Customer Tracker</h1>
+    <nav>
+      <a href="/">Customers</a>
+      <a class="current" href="/add">Add customer</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Add customer</h2>
+    <p class="lead">This form posts to the server, so a recording must stop at the Save button.</p>
+    <form method="post" action="/add">
+      <label>Full name
+        <input type="text" name="name" placeholder="Full name">
+      </label>
+      <label>Email
+        <input type="email" name="email" placeholder="name@example.com">
+      </label>
+      <label>Status
+        <select name="status">
+          <option>Active</option>
+          <option>Paused</option>
+          <option>Closed</option>
+        </select>
+      </label>
+      <label>Notes
+        <textarea name="notes" placeholder="Anything worth remembering"></textarea>
+      </label>
+      <button type="submit">Save customer</button>
+    </form>
+  </main>
+</body>
+</html>

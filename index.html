@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sample Customer Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Sample Customer Tracker</h1>
+    <nav>
+      <a class="current" href="/">Customers</a>
+      <a href="/add">Add customer</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Customers</h2>
+    <p class="lead">Every record on this page is invented. It exists only so you can practice recording.</p>
+    <div class="bar">
+      <input type="search" id="q" placeholder="Search customers" aria-label="Search customers">
+      <select id="status" aria-label="Status filter">
+        <option value="">All statuses</option>
+        <option value="Active">Active</option>
+        <option value="Paused">Paused</option>
+        <option value="Closed">Closed</option>
+      </select>
+      <span class="spacer"></span>
+      <button type="button" class="secondary" id="export">Export CSV</button>
+      <a class="button" href="/add">Add customer</a>
+    </div>
+    <table>
+      <thead><tr><th>Name</th><th>Business</th><th>City</th><th>Status</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="count" id="count"></p>
+  </main>
+  <script>
+    // Obviously invented data: made-up people, made-up businesses, example.com addresses.
+    const customers = [
+      { name: "Pat Sample", business: "Sample Plumbing Co.", city: "Springfield", status: "Active" },
+      { name: "Robin Placeholder", business: "Placeholder Bakery", city: "Riverton", status: "Active" },
+      { name: "Casey Demo", business: "Demo Landscaping", city: "Lakeview", status: "Paused" },
+      { name: "Jordan Example", business: "Example Dental Group", city: "Springfield", status: "Active" },
+      { name: "Alex Testperson", business: "Testperson Auto Repair", city: "Fairview", status: "Closed" },
+      { name: "Morgan Fakename", business: "Fakename Fitness", city: "Riverton", status: "Active" },
+      { name: "Taylor Invented", business: "Invented Roofing", city: "Lakeview", status: "Paused" },
+      { name: "Sam Notreal", business: "Notreal Cleaning Services", city: "Fairview", status: "Active" },
+    ];
+    const rows = document.getElementById("rows");
+    const q = document.getElementById("q");
+    const status = document.getElementById("status");
+    const count = document.getElementById("count");
+    function draw() {
+      const term = q.value.trim().toLowerCase();
+      const list = customers.filter((c) =>
+        (!status.value || c.status === status.value) &&
+        (!term || (c.name + " " + c.business + " " + c.city).toLowerCase().includes(term)));
+      rows.innerHTML = list.length
+        ? list.map((c) => `<tr><td>${c.name}</td><td>${c.business}</td><td>${c.city}</td>` +
+            `<td><span class="badge ${c.status.toLowerCase()}">${c.status}</span></td></tr>`).join("")
+        : `<tr><td colspan="4" class="empty">No customers match.</td></tr>`;
+      count.textContent = `Showing ${list.length} of ${customers.length} customers`;
+    }
+    q.addEventListener("input", draw);
+    status.addEventListener("change", draw);
+    document.getElementById("export").addEventListener("click", () => {
+      alert("A real app would download a CSV here.");
+    });
+    draw();
+  </script>
+</body>
+</html>

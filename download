@@ -1,0 +1,8 @@
+node_modules/
+render/node_modules/
+render/public/capture/
+out/
+*.mp4
+__pycache__/
+.env
+.env.*

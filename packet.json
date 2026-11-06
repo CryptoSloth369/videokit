@@ -1,0 +1,15 @@
+{
+  "project": "Sample Customer Tracker",
+  "tagline": "How-to videos and written steps",
+  "accent": "#1735BB",
+  "groups": [
+    {
+      "name": "Sample Customer Tracker",
+      "dir": ".",
+      "groups": [
+        { "name": "Customers", "videos": [{ "slug": "find-a-customer", "keywords": "search filter lookup" }] },
+        { "name": "Add customer", "videos": [{ "slug": "add-a-customer", "keywords": "new create form" }] }
+      ]
+    }
+  ]
+}

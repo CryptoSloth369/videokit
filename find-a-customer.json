@@ -1,0 +1,30 @@
+{
+  "title": "Find a customer",
+  "subtitle": "Customers",
+  "start": "/",
+  "steps": [
+    {
+      "say": "Click the Search customers box and type a name.",
+      "do": "type",
+      "target": { "placeholder": "Search customers" },
+      "value": "Robin"
+    },
+    {
+      "say": "The list shrinks to the customers that match.",
+      "do": "look",
+      "target": { "role": "table" },
+      "zoom": false
+    },
+    {
+      "say": "Pick a status to narrow the list further.",
+      "do": "select",
+      "target": { "label": "Status filter" },
+      "value": "Active"
+    },
+    {
+      "say": "The count under the table shows how many customers are listed.",
+      "do": "look",
+      "target": { "text": "Showing" }
+    }
+  ]
+}

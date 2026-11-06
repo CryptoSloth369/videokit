@@ -1,0 +1,36 @@
+{
+  "title": "Add a customer",
+  "subtitle": "Add customer",
+  "start": "/",
+  "steps": [
+    {
+      "say": "Click Add customer at the top of the page.",
+      "do": "click",
+      "target": { "role": "link", "name": "Add customer", "exact": true, "within": "nav" },
+      "waitFor": { "role": "heading", "name": "Add customer" }
+    },
+    {
+      "say": "Type the customer's full name.",
+      "do": "type",
+      "target": { "placeholder": "Full name" },
+      "value": "Sam Example"
+    },
+    {
+      "say": "Type their email address.",
+      "do": "type",
+      "target": { "placeholder": "name@example.com" },
+      "value": "sam@example.com"
+    },
+    {
+      "say": "Choose a status.",
+      "do": "select",
+      "target": { "label": "Status" },
+      "value": "Paused"
+    },
+    {
+      "say": "Click Save customer to add them.",
+      "do": "hover",
+      "target": { "role": "button", "name": "Save customer" }
+    }
+  ]
+}
