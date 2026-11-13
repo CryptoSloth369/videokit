@@ -239,7 +239,18 @@ def generate_image(prompt: str, out_dir: str, name: str, aspect: str = "16:9", r
 
 
 def main() -> None:
+    import argparse
+
+    ap = argparse.ArgumentParser(prog="videokit-mcp", description="videokit MCP server (stdio by default)")
+    ap.add_argument("--http", action="store_true", help="serve MCP over streamable HTTP instead of stdio")
+    ap.add_argument("--host", default="127.0.0.1", help="HTTP bind address (default 127.0.0.1: this machine only)")
+    ap.add_argument("--port", type=int, default=8765)
+    args = ap.parse_args()
     config.mode()  # fail fast on a bad VIDEOKIT_MODE
     for d in (config.HOME, config.JOBS_DIR, config.OUT_DIR):
         d.mkdir(parents=True, exist_ok=True)
-    mcp.run()
+    if args.http:
+        # No authentication of its own: keep it on 127.0.0.1 behind your platform's backend (see README).
+        mcp.run("streamable-http", host=args.host, port=args.port)
+    else:
+        mcp.run()

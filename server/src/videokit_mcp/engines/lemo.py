@@ -33,6 +33,7 @@ class Lemo(Engine):
         env = {"LEMO_OPUSCAR_HOME": str(self.lib)}
         venv_py = str(self.lib / ".venv" / "bin" / "python")
         return jobs.start(self.meta.id, "install lemo-opuscar (core tier)", [
+            *self.fetch_steps(),
             jobs.Step("library setup: npm packages, Python core tier",
                       [sh, "plugin/skills/lemo-opuscar/scripts/setup.sh", "deps"], cwd=str(self.lib), env=env),
             # tools/subset.py writes .woff2, which needs brotli; upstream's requirements.txt leaves it out
@@ -43,6 +44,7 @@ class Lemo(Engine):
 
     # -- styles ------------------------------------------------------------------------------------------------
     def _styles(self) -> list[dict]:
+        self.require()
         out = []
         for f in sorted((self.lib / "styles").glob("*/style.json")):
             if f.parent.name.startswith("_"):

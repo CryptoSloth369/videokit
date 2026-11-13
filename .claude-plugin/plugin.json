@@ -1,0 +1,12 @@
+{
+  "name": "videokit",
+  "version": "0.3.0",
+  "description": "Make videos from any chat: five code-to-video engines (film styles, product promos, character animation, app tutorials, pixel effects) plus narration, music sync, sound effects, images and credits, through one MCP server.",
+  "author": {
+    "name": "CryptoSloth369",
+    "url": "https://github.com/CryptoSloth369"
+  },
+  "repository": "https://github.com/CryptoSloth369/videokit",
+  "license": "MIT",
+  "mcpServers": "./.claude-plugin/mcp.json"
+}

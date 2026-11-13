@@ -23,6 +23,7 @@ class PixelFX(Engine):
         return self.meta.source
 
     def styles(self, query: str) -> list[dict]:
+        self.require()
         node = config.node()
         if not node:
             raise EngineError("node (18+) is needed")
@@ -38,6 +39,7 @@ class PixelFX(Engine):
         return out
 
     def scaffold(self, project_dir: Path, style: str, options: dict) -> dict:
+        self.require()
         """Copy the library into a workspace where new effects can be made (tools/new.mjs) without touching
         the pinned upstream copy. No npm install needed: the tools use plain Node."""
         if (project_dir / "tools" / "render.mjs").exists():
@@ -60,6 +62,7 @@ class PixelFX(Engine):
         return made
 
     def render(self, project_dir: Path | None, options: dict) -> jobs.Job:
+        self.require()
         node = config.node()
         if not node:
             raise EngineError("node (18+) is needed")

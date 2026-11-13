@@ -10,7 +10,7 @@ from pathlib import Path
 import pytest
 from mcp import Client
 
-from videokit_mcp import config
+from videokit_mcp import config, vendor
 from videokit_mcp.server import mcp
 
 from test_server import data, wait
@@ -130,7 +130,7 @@ async def test_prompts():
 
 
 async def test_sound_tools(tmp_path: Path):
-    bgm = config.VENDOR_DIR / "video-shotcraft" / "assets" / "audio" / "bgm" / "cat-walk.mp3"
+    bgm = vendor.path("video-shotcraft") / "assets" / "audio" / "bgm" / "cat-walk.mp3"
     async with Client(mcp) as c:
         b = data(await c.call_tool("beats", {"audio_path": str(bgm)}))
         assert 125 < b["tempo_bpm"] < 133 and b["beat_count"] > 50

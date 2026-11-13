@@ -11,6 +11,7 @@ from .base import Engine, EngineError
 
 class Animation(Engine):
     def scaffold(self, project_dir: Path, style: str, options: dict) -> dict:
+        self.require()
         if project_dir.exists() and any(project_dir.iterdir()):
             raise EngineError(f"{project_dir} is not empty; give a new folder for the animation project")
         fonts.copy_tree(self.meta.source, project_dir, skip=(".git", "node_modules", "out", "docs"))
@@ -35,6 +36,7 @@ class Animation(Engine):
         return res
 
     def render(self, project_dir: Path | None, options: dict) -> jobs.Job:
+        self.require()
         if project_dir is None or not (project_dir / "render.mjs").exists():
             raise EngineError("project_dir must be a project made by scaffold('claude-animation-base', ...)")
         node, npm = config.node(), config.npm()

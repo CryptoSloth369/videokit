@@ -10,7 +10,7 @@ import subprocess
 import urllib.request
 from pathlib import Path
 
-from . import config, jobs
+from . import config, jobs, vendor
 
 KOKORO_URL = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/"
 KOKORO_FILES = ("kokoro-v1.0.onnx", "voices-v1.0.bin")
@@ -161,9 +161,10 @@ def mux(video: Path, tracks: list[dict], out: Path, lufs: float = -14.0, true_pe
 # -- sound effects ------------------------------------------------------------------------------------------------
 def sound_effects(action: str, query: str, ids: list[str], license: str, max_duration: float | None,
                   out_dir: Path | None, limit: int) -> dict:
-    script = config.VENDOR_DIR / "video-shotcraft" / "assets" / "scripts" / "sfx-source.py"
-    if not script.exists():
-        raise AudioError("video-shotcraft submodule missing: run `git submodule update --init`")
+    try:
+        script = vendor.fetch_now("video-shotcraft") / "assets" / "scripts" / "sfx-source.py"
+    except RuntimeError as e:
+        raise AudioError(str(e)) from None
     if license not in ("cc0", "by"):
         raise AudioError("license must be 'cc0' (no credit needed) or 'by' (CC0 + CC BY, credit needed)")
     if action == "search":

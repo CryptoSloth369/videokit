@@ -10,7 +10,7 @@ import yaml
 
 from mcp.server.mcpserver.exceptions import ToolError
 
-from .. import config, jobs
+from .. import config, jobs, vendor
 
 
 class EngineError(ToolError):
@@ -38,14 +38,17 @@ class Meta:
     requires: list[str]
     guides: dict[str, str]          # topic -> path relative to source
     gpu_note: str = ""
+    vendor: str | None = None       # name in vendor.lock.json when the source is an upstream repo
 
     @classmethod
     def load(cls, yaml_path: Path) -> "Meta":
         d: dict[str, Any] = yaml.safe_load(yaml_path.read_text())
         lic = d["license"]
+        vend = d["source"].removeprefix("vendor/") if d["source"].startswith("vendor/") else None
+        source = vendor.path(vend) if vend else (config.REPO / d["source"]).resolve()
         return cls(
             id=d["id"], name=d["name"], summary=d["summary"].strip(), good_for=d.get("good_for", []),
-            source=(config.REPO / d["source"]).resolve(), upstream=d.get("upstream", ""),
+            source=source, upstream=d.get("upstream", ""), vendor=vend,
             license=License(code=lic["code"], docs=lic.get("docs", lic["code"]),
                             monetized_videos=bool(lic["monetized_videos"]), service_mode=lic["service_mode"],
                             notes=lic.get("notes", [])),
@@ -64,9 +67,21 @@ class Engine:
     # -- discovery ---------------------------------------------------------------------------------------------
     def installed(self) -> tuple[bool, str]:
         """(ready, what is missing)."""
-        if not self.meta.source.exists() or not any(self.meta.source.iterdir()):
-            return False, f"{self.meta.source} is empty: run `git submodule update --init` in the videokit repo"
+        if self.meta.vendor and not vendor.present(self.meta.vendor):
+            return False, f"not downloaded yet: call setup_engine('{self.meta.id}')"
         return True, ""
+
+    def fetch_steps(self) -> list[jobs.Step]:
+        """Steps that download the upstream repo at its pinned commit, when it is not there yet."""
+        if not self.meta.vendor or vendor.present(self.meta.vendor):
+            return []
+        return [jobs.Step(f"download {self.meta.vendor} (pinned commit)", argv) for argv in
+                vendor.fetch_argv(self.meta.vendor)]
+
+    def require(self) -> None:
+        ok, missing = self.installed()
+        if not ok:
+            raise EngineError(missing)
 
     def guide(self, topic: str) -> str:
         if not topic:
@@ -91,7 +106,10 @@ class Engine:
 
     # -- actions -----------------------------------------------------------------------------------------------
     def setup(self) -> jobs.Job:
-        raise EngineError(f"{self.meta.id} needs no setup")
+        steps = self.fetch_steps()
+        if not steps:
+            raise EngineError(f"{self.meta.id} is ready: it needs no setup (dependencies install on first render)")
+        return jobs.start(self.meta.id, f"download {self.meta.id}", steps)
 
     def scaffold(self, project_dir: Path, style: str, options: dict) -> dict:
         raise EngineError(f"{self.meta.id} has no project template")

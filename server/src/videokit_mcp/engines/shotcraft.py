@@ -19,6 +19,7 @@ class Shotcraft(Engine):
     has_style_guides = True
 
     def _cards(self) -> list[dict]:
+        self.require()
         lib = json.loads((self.meta.source / "gallery" / "api" / "library.json").read_text(encoding="utf-8"))
         return [{"name": c["name"], "summary": c.get("summary"), "use": c.get("use"), "duration": c.get("duration"),
                  "energy": c.get("energy"), "styles": [s.get("key") for s in c.get("styles", [])],
@@ -39,6 +40,7 @@ class Shotcraft(Engine):
         return (self.meta.source / card["doc"]).read_text(encoding="utf-8")
 
     def scaffold(self, project_dir: Path, style: str, options: dict) -> dict:
+        self.require()
         if project_dir.exists() and any(project_dir.iterdir()):
             raise EngineError(f"{project_dir} is not empty; give a new folder for the promo project")
         src = self.meta.source
@@ -61,6 +63,7 @@ class Shotcraft(Engine):
         }
 
     def render(self, project_dir: Path | None, options: dict) -> jobs.Job:
+        self.require()
         if project_dir is None or not (project_dir / "package.json").exists():
             raise EngineError("project_dir must be a promo project made by scaffold('video-shotcraft', ...)")
         npm, node = config.npm(), config.node()

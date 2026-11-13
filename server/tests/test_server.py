@@ -124,3 +124,13 @@ async def test_service_mode_hides_personal_only(monkeypatch):
         for e in personal:
             r = await c.call_tool("get_guide", {"engine": e.meta.id})
             assert r.is_error and "personal use only" in r.content[0].text
+
+
+def test_vendor_lock_matches_submodules():
+    """vendor.lock.json (used by plugin installs) must pin the same commits as the git submodules."""
+    from videokit_mcp import vendor
+    r = subprocess.run(["git", "submodule", "status"], cwd=config.REPO, capture_output=True, text=True)
+    if r.returncode != 0 or not r.stdout.strip():
+        pytest.skip("not a git checkout with submodules")
+    pins = {Path(p).name: c.lstrip("-+ U") for c, p, *_ in (line.split() for line in r.stdout.splitlines())}
+    assert {k: v["commit"] for k, v in vendor.lock().items()} == pins

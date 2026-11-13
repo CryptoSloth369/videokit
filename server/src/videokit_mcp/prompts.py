@@ -15,7 +15,7 @@ import subprocess
 from functools import cache
 from pathlib import Path
 
-from . import config
+from . import config, vendor
 
 OPUS_CN_URL = "https://github.com/joeseesun/opus-video-prompts.git"
 USE_NOTE = ("Use as inspiration, not as a template to copy. The prompt belongs to its author (credit them if you "
@@ -38,7 +38,10 @@ def _opus_cn_dir(fetch: bool) -> Path | None:
 def _index() -> tuple[list[dict], list[str]]:
     items: list[dict] = []
     problems: list[str] = []
-    aw = config.VENDOR_DIR / "awesome-opus5-5-videos" / "data" / "videos.json"
+    try:
+        aw = vendor.fetch_now("awesome-opus5-5-videos") / "data" / "videos.json"
+    except RuntimeError:
+        aw = Path("/nonexistent")
     if aw.exists():
         for v in json.loads(aw.read_text(encoding="utf-8")):
             items.append({"id": f"awesome:{v['slug']}", "source": "awesome", "title": v["prompt"][:90],
@@ -47,7 +50,7 @@ def _index() -> tuple[list[dict], list[str]]:
                           "remake_url": v.get("skillry_url"), "partial": bool(v.get("prompt_partial")),
                           "_text": v["prompt"]})
     else:
-        problems.append("awesome library missing: run `git submodule update --init` in the videokit repo")
+        problems.append("the awesome prompt library could not be downloaded (offline?)")
     cn = _opus_cn_dir(fetch=True)
     if cn:
         for f in sorted((cn / "prompts").glob("*.md")):

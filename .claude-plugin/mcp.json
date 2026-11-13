@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "videokit": {
+      "command": "uv",
+      "args": ["run", "--quiet", "--directory", "${CLAUDE_PLUGIN_ROOT}/server", "videokit-mcp"],
+      "env": { "VIDEOKIT_MODE": "personal" }
+    }
+  }
+}

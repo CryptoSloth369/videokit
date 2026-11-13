@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "videokit": {
+      "command": "uv",
+      "args": ["run", "--quiet", "--directory", "server", "videokit-mcp"],
+      "env": { "VIDEOKIT_MODE": "personal" }
+    }
+  }
+}

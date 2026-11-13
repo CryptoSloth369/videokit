@@ -1,0 +1,12 @@
+{
+  "name": "videokit",
+  "owner": { "name": "CryptoSloth369", "url": "https://github.com/CryptoSloth369" },
+  "metadata": { "description": "videokit: make videos from any AI chat." },
+  "plugins": [
+    {
+      "name": "videokit",
+      "source": "./",
+      "description": "Five code-to-video engines plus narration, music sync, sound effects, images and credits, through one MCP server."
+    }
+  ]
+}
