@@ -1,0 +1,22 @@
+{
+  "awesome-opus5-5-videos": {
+    "url": "https://github.com/yihui-dev/awesome-opus5-5-videos.git",
+    "commit": "92aee2f586ac0715cb3cbcb6384834f98a33383d"
+  },
+  "claude-animation-base": {
+    "url": "https://github.com/JohnHeibel/ClaudeAnimationBase.git",
+    "commit": "0ac8bf2b31942376cb6b8c4074715595d512acd2"
+  },
+  "lemo-opuscar": {
+    "url": "https://github.com/lemomo-ai/lemo-opuscar.git",
+    "commit": "3a7132b996be0241c1ea0ab180d519f06e6f10b6"
+  },
+  "pixelfx": {
+    "url": "https://github.com/patch-gg/pixelfx.git",
+    "commit": "5294518ce7c72e48b6100a744596e0acf57f2826"
+  },
+  "video-shotcraft": {
+    "url": "https://github.com/Vincentwei1021/video-shotcraft.git",
+    "commit": "6700db2ba80572ebc777b99d72049679fed9840c"
+  }
+}

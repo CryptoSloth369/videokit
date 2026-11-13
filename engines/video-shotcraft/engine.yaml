@@ -1,0 +1,32 @@
+id: video-shotcraft
+name: video-shotcraft
+summary: >
+  Cinematic product promos from real screenshots of your web app: 124 tuned shot recipes, the Ink Press promo
+  template, storyboards, beat sync and sound design, rendered with Remotion. Sharp, on-brand, fully editable.
+good_for: [product promos, SaaS launch videos, app feature highlights, social ads]
+source: vendor/video-shotcraft
+upstream: https://github.com/Vincentwei1021/video-shotcraft
+requires: [node>=20, chrome, ffmpeg, "your web app running on demo data (for page captures)"]
+guides:
+  videokit: "@/engines/video-shotcraft/VIDEOKIT.md"
+  skill: SKILL.md
+  readme: README.md
+  pipeline: references/pipeline.md
+  co-creation: references/guided-free-creation.md
+  aesthetics: references/aesthetic-rules.md
+  sound: references/sound-design.md
+  sfx: references/sfx-sourcing.md
+  beat-sync: references/music-beat-sync.md
+  review: references/final-review.md
+  template: template/TEMPLATE.md
+  themes: template/THEMES.md
+license:
+  code: Apache-2.0
+  docs: Apache-2.0
+  monetized_videos: true
+  service_mode: allowed
+  notes:
+    - "Remotion: free for individuals and companies of up to 3 people; larger companies need a Remotion company license."
+    - "Five template sound effects have no recorded source (keyboard, riser-cine, sparkle, whoosh-big, pop): replace before monetizing."
+    - "BGM bgm-tech-house.mp3 has no recorded source: do not use it."
+    - "Freesound effects: CC0 by default; CC BY needs a credit line (write_credits)."

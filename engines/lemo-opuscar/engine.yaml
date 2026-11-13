@@ -1,0 +1,28 @@
+id: lemo-opuscar
+name: Lemo-Opuscar
+summary: >
+  99 film styles (oil painting, watercolor, ukiyo-e, chalkboard, neon, satellite briefing, LiDAR survey, product
+  teardown, news package and more), each with rules an AI follows to make a short narrated film entirely in code.
+  The richest engine here for explainers, story films, launches and music videos.
+good_for: [explainers, short story films, launches, news-style pieces, music videos, documentaries from real data]
+source: vendor/lemo-opuscar
+upstream: https://github.com/lemomo-ai/lemo-opuscar
+requires: [node>=20, python>=3.11, "ffmpeg>=7", chrome, "GPU recommended for 3D and shader styles"]
+gpu_note: "3D, CRT and shader-heavy styles render slowly on software graphics; 2D styles are fine."
+guides:
+  videokit: "@/engines/lemo-opuscar/VIDEOKIT.md"
+  agents: AGENTS.md
+  director: DIRECTOR.md
+  technique: TECHNIQUE.md
+  my-styles: MY-STYLES.md
+  styles: styles/README.md
+  tools: core/README.md
+license:
+  code: MIT
+  docs: CC BY-NC 4.0 (plus a permission to use them for your own films, commercial included)
+  monetized_videos: true
+  service_mode: personal_only
+  notes:
+    - "Films you make are yours, commercial films included; no credit needed."
+    - "The style guides are CC BY-NC 4.0: never copy them into a product, service or anything sold. A commercial licence is available from the author (lemomo.studio@gmail.com)."
+    - "Never reuse demo stories, music, fonts, footage, photos, the six demo narration tracks, or Clawd (Anthropic's character)."
