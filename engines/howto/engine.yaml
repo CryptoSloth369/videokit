@@ -1,0 +1,22 @@
+id: howto
+name: How-to Video Kit
+summary: >
+  Tutorial videos of a web app without screen recording. Step files say what to click and one caption per step;
+  headless Chrome plays them against demo data, then Remotion renders a framed app, a gliding cursor, click
+  ripples, zoom and "Step 2 of 5" captions. Also builds a searchable help-center page from the videos.
+good_for: [software tutorials, product walkthroughs, help-center videos, onboarding]
+source: engines/howto
+upstream: https://redwaterrev.com (Nick Rougeau, Redwater Revenue)
+requires: [node>=20, python>=3.10, ffmpeg, chrome, "your web app running on demo data"]
+guides:
+  start: START-HERE-FOR-YOUR-AI.md
+  steps: docs/WRITING-STEPS.md
+  readme: README.md
+license:
+  code: MIT
+  docs: MIT
+  monetized_videos: true
+  service_mode: allowed
+  notes:
+    - "Renders with Remotion: free for individuals and companies of up to 3 people; larger companies need a Remotion company license (remotion.dev/license)."
+    - "Record only demo data: the recorder blocks any request that could write."

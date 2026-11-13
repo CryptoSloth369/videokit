@@ -1,0 +1,20 @@
+[submodule "vendor/lemo-opuscar"]
+	path = vendor/lemo-opuscar
+	url = https://github.com/lemomo-ai/lemo-opuscar.git
+	shallow = true
+[submodule "vendor/video-shotcraft"]
+	path = vendor/video-shotcraft
+	url = https://github.com/Vincentwei1021/video-shotcraft.git
+	shallow = true
+[submodule "vendor/claude-animation-base"]
+	path = vendor/claude-animation-base
+	url = https://github.com/JohnHeibel/ClaudeAnimationBase.git
+	shallow = true
+[submodule "vendor/pixelfx"]
+	path = vendor/pixelfx
+	url = https://github.com/patch-gg/pixelfx.git
+	shallow = true
+[submodule "vendor/awesome-opus5-5-videos"]
+	path = vendor/awesome-opus5-5-videos
+	url = https://github.com/yihui-dev/awesome-opus5-5-videos.git
+	shallow = true

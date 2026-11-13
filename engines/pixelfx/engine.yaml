@@ -1,0 +1,22 @@
+id: pixelfx
+name: pixelfx
+summary: >
+  244 pixel art effects and animations, each a small piece of code: fire, explosions, magic, weather, UI,
+  pickups, critters and more, many acted out by a character (wind-up, hit, recovery). Renders MP4 or GIF
+  clips, acted-out clips and transparent sprite sheets; new effects are made with a draft-render-look-refine loop.
+good_for: [retro and gaming videos, pixel art overlays, game juice, sprite sheets, short loops]
+source: vendor/pixelfx
+upstream: https://github.com/patch-gg/pixelfx
+requires: [node>=18, ffmpeg]
+guides:
+  skill: skills/pixelfx/SKILL.md
+  catalog: docs/CATALOG.md
+  readme: README.md
+license:
+  code: MIT
+  docs: MIT
+  monetized_videos: true
+  service_mode: allowed
+  notes:
+    - "Some effects adapt Hugo Duprez's Sprite Fusion VFX and Hollow Crown (both MIT); keep NOTICE.md with any copy you ship."
+    - "The Patch Pixel font in gallery/fonts is NOT covered by the MIT license: do not use it in videos."
