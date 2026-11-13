@@ -71,9 +71,20 @@ class Engine:
     def guide(self, topic: str) -> str:
         if not topic:
             topic = next(iter(self.meta.guides))
+        if topic.startswith("style/"):
+            return self.style_guide(topic.removeprefix("style/"))
         if topic not in self.meta.guides:
-            raise EngineError(f"unknown guide {topic!r} for {self.meta.id}; topics: {list(self.meta.guides)}")
-        return (self.meta.source / self.meta.guides[topic]).read_text(encoding="utf-8")
+            raise EngineError(f"unknown guide {topic!r} for {self.meta.id}; topics: {list(self.meta.guides)}"
+                              + (" or style/<slug>" if self.has_style_guides else ""))
+        rel = self.meta.guides[topic]
+        # "@/x" is relative to the videokit repo (adapter notes); anything else to the engine's own source
+        path = config.REPO / rel[2:] if rel.startswith("@/") else self.meta.source / rel
+        return path.read_text(encoding="utf-8")
+
+    has_style_guides = False
+
+    def style_guide(self, slug: str) -> str:
+        raise EngineError(f"{self.meta.id} has no per-style guides")
 
     def styles(self, query: str) -> list[dict]:
         return []

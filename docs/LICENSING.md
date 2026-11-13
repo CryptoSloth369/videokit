@@ -32,8 +32,10 @@ video-shotcraft and the how-to kit render with [Remotion](https://www.remotion.d
 individuals and for companies of up to 3 people. A larger company needs a Remotion company license; check again
 before mysticsloth renders for other users at scale.
 
-## Voices, music and YouTube
+## Voices, music, images and YouTube
 
+- Images from `generate_image` come from Google Gemini under Google's terms (you may use what you generate,
+  including commercially) and carry Google's invisible SynthID watermark.
 - Narration uses Kokoro (offline, Apache-2.0 weights). Microsoft edge-tts is off by default: its terms for
   commercial use are unclear.
 - Music and sound effects come only from sources whose license allows commercial use. Every render writes the

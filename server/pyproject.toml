@@ -4,8 +4,11 @@ version = "0.1.0"
 description = "MCP server that makes videos with several code-to-video engines"
 requires-python = ">=3.13"
 dependencies = [
+    "kokoro-onnx>=0.6.1",
+    "librosa>=1.0.1",
     "mcp>=1.20",
     "pyyaml>=6.0.3",
+    "soundfile>=0.14.0",
 ]
 
 [project.scripts]
@@ -19,3 +22,5 @@ build-backend = "uv_build"
 dev = [
     "pytest>=9.2.0",
 ]
+[tool.pytest.ini_options]
+pythonpath = ["tests"]

@@ -1,0 +1,22 @@
+id: claude-animation-base
+name: Claude Animation Base
+summary: >
+  Hand-drawn character animation in p5.js and p5.brush: a character with views, emotions, mouths and dances,
+  shots, camera, transitions and a painted, boiling-linework medium. Short story clips and music-video moments.
+good_for: [character animation, short story clips, mascot videos, music video scenes]
+source: vendor/claude-animation-base
+upstream: https://github.com/JohnHeibel/ClaudeAnimationBase
+requires: [node>=20, chrome, ffmpeg, "GPU for watercolour fills"]
+gpu_note: "Watercolour brush fills take ~25 s per frame without a GPU; use flat wash fills in the cloud."
+guides:
+  videokit: "@/engines/claude-animation-base/VIDEOKIT.md"
+  guide: ANIMATION_GUIDE.md
+  readme: README.md
+license:
+  code: MIT
+  docs: MIT
+  monetized_videos: true
+  service_mode: allowed
+  notes:
+    - "Clawd (src/clawd.js) is Anthropic's character: private tests only. Published or monetized videos use your own character."
+    - "Fonts are made local at scaffold time (Permanent Marker, SIL OFL)."

@@ -7,10 +7,14 @@ from functools import cache
 
 from .. import config
 from .base import Engine, EngineError, Meta
+from .animation import Animation
 from .howto import HowTo
+from .lemo import Lemo
 from .pixelfx import PixelFX
+from .shotcraft import Shotcraft
 
-ADAPTERS: dict[str, type[Engine]] = {"howto": HowTo, "pixelfx": PixelFX}
+ADAPTERS: dict[str, type[Engine]] = {"howto": HowTo, "pixelfx": PixelFX, "lemo-opuscar": Lemo,
+                                      "video-shotcraft": Shotcraft, "claude-animation-base": Animation}
 
 
 @cache
