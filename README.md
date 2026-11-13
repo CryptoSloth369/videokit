@@ -80,9 +80,13 @@ The engines' guides were written for Claude and give the best results with it; o
 
 ### Claude Code on the web (cloud sessions)
 
-The repository's `.mcp.json` registers the server when a session opens this repository. The environment's
+The repository's `.mcp.json` registers the server when a session opens this repository; approve `videokit`
+once when Claude Code asks (a repository cannot pre-approve its own servers). To use videokit from chats on
+another repository, see [docs/USE-IN-ANOTHER-REPO.md](docs/USE-IN-ANOTHER-REPO.md). The environment's
 setup script should run `bash videokit/scripts/cloud-setup.sh` (it installs the server, the engines' packages and
-ffmpeg 8.1); the "Mystic Sloth" environment already does. Freesound refuses requests from
+ffmpeg 8.1), guarded so a branch without the script still starts:
+`if [ -f videokit/scripts/cloud-setup.sh ]; then bash videokit/scripts/cloud-setup.sh; fi`. The "Mystic Sloth"
+environment already has this. Freesound refuses requests from
 cloud networks, so `sound_effects` works only from your own computer; everything else works in the cloud.
 
 ## First use
