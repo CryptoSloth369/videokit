@@ -60,7 +60,10 @@ class Animation(Engine):
                                   cwd=str(project_dir)))
         elif action == "video":
             out = project_dir / "out" / options.get("name", "video.mp4")
-            workers = int(options.get("workers") or max(1, (os.cpu_count() or 2)))
+            # Software WebGL: parallel browsers starve each other and hit render.mjs's 30 s page-load timeout,
+            # so without a GPU render one frame at a time (measured: 1 worker works, 2 and 4 time out on 4 cores).
+            default_workers = min(4, os.cpu_count() or 2) if config.has_gpu() else 1
+            workers = int(options.get("workers") or default_workers)
             audio = [f"--audio={options['audio']}"] if options.get("audio") else []
             if rng or options.get("fresh"):
                 # encode joins every frame in out/frames: drop frames left by an earlier, different render
